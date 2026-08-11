@@ -387,6 +387,58 @@
         }
       },
       "html": "<div class=\"tna-fieldset tna-fieldset--small-hint\" data-testattribute=\"foobar\"><fieldset class=\"tna-fieldset__inner\"><legend class=\"tna-fieldset__legend\"><span class=\"tna-fieldset__heading tna-heading-m\">Type</span></legend><div class=\"tna-fieldset__body\"><div class=\"tna-radios\" id=\"type\"><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-audio\" value=\"audio\" name=\"type\"><label for=\"type-audio\" class=\"tna-radios__item-label\">Audio</label></div><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-image\" value=\"image\" name=\"type\"><label for=\"type-image\" class=\"tna-radios__item-label\">Image</label></div><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-video\" value=\"video\" name=\"type\"><label for=\"type-video\" class=\"tna-radios__item-label\">Video</label></div></div></div></fieldset></div>"
+    },
+    {
+      "name": "with fieldset classes",
+      "options": {
+        "label": "Type",
+        "headingSize": "m",
+        "id": "type",
+        "name": "type",
+        "items": [
+          {
+            "text": "Audio",
+            "value": "audio"
+          },
+          {
+            "text": "Image",
+            "value": "image"
+          },
+          {
+            "text": "Video",
+            "value": "video"
+          }
+        ],
+        "fieldsetClasses": "test-class"
+      },
+      "html": "<div class=\"tna-fieldset tna-fieldset--small-hint\"><fieldset class=\"tna-fieldset__inner test-class\"><legend class=\"tna-fieldset__legend\"><span class=\"tna-fieldset__heading tna-heading-m\">Type</span></legend><div class=\"tna-fieldset__body\"><div class=\"tna-radios\" id=\"type\"><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-audio\" value=\"audio\" name=\"type\"><label for=\"type-audio\" class=\"tna-radios__item-label\">Audio</label></div><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-image\" value=\"image\" name=\"type\"><label for=\"type-image\" class=\"tna-radios__item-label\">Image</label></div><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-video\" value=\"video\" name=\"type\"><label for=\"type-video\" class=\"tna-radios__item-label\">Video</label></div></div></div></fieldset></div>"
+    },
+    {
+      "name": "with fieldset attributes",
+      "options": {
+        "label": "Type",
+        "headingSize": "m",
+        "id": "type",
+        "name": "type",
+        "items": [
+          {
+            "text": "Audio",
+            "value": "audio"
+          },
+          {
+            "text": "Image",
+            "value": "image"
+          },
+          {
+            "text": "Video",
+            "value": "video"
+          }
+        ],
+        "fieldsetAttributes": {
+          "data-testattribute": "foobar"
+        }
+      },
+      "html": "<div class=\"tna-fieldset tna-fieldset--small-hint\"><fieldset class=\"tna-fieldset__inner\" data-testattribute=\"foobar\"><legend class=\"tna-fieldset__legend\"><span class=\"tna-fieldset__heading tna-heading-m\">Type</span></legend><div class=\"tna-fieldset__body\"><div class=\"tna-radios\" id=\"type\"><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-audio\" value=\"audio\" name=\"type\"><label for=\"type-audio\" class=\"tna-radios__item-label\">Audio</label></div><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-image\" value=\"image\" name=\"type\"><label for=\"type-image\" class=\"tna-radios__item-label\">Image</label></div><div class=\"tna-radios__item\"><input type=\"radio\" id=\"type-video\" value=\"video\" name=\"type\"><label for=\"type-video\" class=\"tna-radios__item-label\">Video</label></div></div></div></fieldset></div>"
     }
   ]
 }
