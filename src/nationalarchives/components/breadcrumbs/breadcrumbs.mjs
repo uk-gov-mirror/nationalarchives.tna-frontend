@@ -1,6 +1,6 @@
 import uuidv4 from "../../lib/uuid.mjs";
 
-export class Breadcrumbs {
+export default class Breadcrumbs {
   constructor($module) {
     this.$module = $module;
     this.$breadcrumbsList =

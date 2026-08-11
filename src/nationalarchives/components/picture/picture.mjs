@@ -1,6 +1,6 @@
 import uuidv4 from "../../lib/uuid.mjs";
 
-export class Picture {
+export default class Picture {
   constructor($module) {
     this.$module = $module;
     this.$imageWrapper =

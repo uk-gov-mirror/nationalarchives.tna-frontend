@@ -2,7 +2,7 @@ import Cookies from "@nationalarchives/cookies/src/index.js";
 
 export { Cookies };
 
-export class CookieBanner {
+export default class CookieBanner {
   constructor($module) {
     this.$module = $module;
     this.$acceptButton = $module && $module.querySelector('[value="accept"]');

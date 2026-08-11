@@ -1,4 +1,4 @@
-export class Tabs {
+export default class Tabs {
   constructor($module) {
     this.$module = $module;
     this.$tabList = $module && $module.querySelector(".tna-tabs__list");

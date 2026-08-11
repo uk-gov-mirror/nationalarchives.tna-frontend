@@ -1,4 +1,4 @@
-export class FileInputDroppable {
+export default class FileInputDroppable {
   constructor($module) {
     this.$module = $module;
     this.$body = $module && $module.querySelector(".tna-form-item__body");

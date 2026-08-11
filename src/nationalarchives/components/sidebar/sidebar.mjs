@@ -1,4 +1,4 @@
-export class Sidebar {
+export default class Sidebar {
   constructor($module, options = {}) {
     this.$module = $module;
     this.items =

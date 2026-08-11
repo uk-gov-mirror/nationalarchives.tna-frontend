@@ -1,4 +1,4 @@
-export class TextInputPassword {
+export default class TextInputPassword {
   constructor($module) {
     this.$module = $module;
     this.$input = $module && $module.querySelector(".tna-text-input");

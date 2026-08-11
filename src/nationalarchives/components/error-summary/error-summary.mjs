@@ -1,9 +1,6 @@
-export class ErrorSummary {
+export default class ErrorSummary {
   constructor($module) {
     this.$module = $module;
-  }
-
-  init() {
     if (!this.$module) {
       return;
     }

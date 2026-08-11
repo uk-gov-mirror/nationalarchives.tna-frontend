@@ -1,4 +1,4 @@
-export class Gallery {
+export default class Gallery {
   constructor($module) {
     this.$module = $module;
     this.$itemsContainer =

@@ -1,4 +1,4 @@
-export class TextAreaItemisedRows {
+export default class TextAreaItemisedRows {
   constructor($module, options = {}) {
     this.$module = $module;
     this.$formFieldInput =

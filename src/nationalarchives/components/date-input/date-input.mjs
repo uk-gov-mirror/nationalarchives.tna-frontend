@@ -1,4 +1,4 @@
-export class DateInputProgressive {
+export default class DateInputProgressive {
   constructor($module) {
     this.$module = $module;
     this.$yearWrapper =

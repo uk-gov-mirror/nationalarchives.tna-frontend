@@ -1,6 +1,6 @@
 import { checkTableForScroll } from "../../lib/helpers.mjs";
 
-export class Accordion {
+export default class Accordion {
   constructor($module) {
     this.$module = $module;
     this.$items = $module && $module.querySelectorAll(".tna-accordion__item");

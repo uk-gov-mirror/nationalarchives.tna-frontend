@@ -1,4 +1,4 @@
-export class Header {
+export default class Header {
   constructor($module) {
     this.$module = $module;
     this.$toggleButton =

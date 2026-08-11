@@ -1,6 +1,6 @@
 import Cookies from "@nationalarchives/cookies/src/index.js";
 
-export class Footer {
+export default class Footer {
   constructor($module, themeCookieName = "theme") {
     this.$module = $module;
     this.$themeSelector =

@@ -1,4 +1,4 @@
-export class GlobalHeader {
+export default class GlobalHeader {
   constructor($module) {
     this.$module = $module;
     this.$toggleButton =

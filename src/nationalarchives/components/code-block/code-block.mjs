@@ -1,4 +1,4 @@
-export class CodeBlock {
+export default class CodeBlock {
   constructor($module) {
     this.$module = $module;
     this.$code = this.$module.querySelector("pre code");

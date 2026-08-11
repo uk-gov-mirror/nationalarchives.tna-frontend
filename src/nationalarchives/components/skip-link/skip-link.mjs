@@ -1,4 +1,4 @@
-export class SkipLink {
+export default class SkipLink {
   linkedElementListener = false;
 
   constructor($module) {
