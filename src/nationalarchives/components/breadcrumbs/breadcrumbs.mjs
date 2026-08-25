@@ -19,11 +19,11 @@ export default class Breadcrumbs {
       this.$breadcrumbs.length > 2 &&
       !this.$module.classList.contains("tna-breadcrumbs--no-collapse")
     ) {
-      this.init();
+      this.init_();
     }
   }
 
-  init() {
+  init_() {
     const uniqueId = `tna-breadcrumbs-${uuidv4()}`;
     const $expandable = document.createElement("li");
     $expandable.classList.add(

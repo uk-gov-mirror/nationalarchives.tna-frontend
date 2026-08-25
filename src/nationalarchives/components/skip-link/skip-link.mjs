@@ -10,18 +10,18 @@ export default class SkipLink {
       document.getElementById(this.linkedElementId);
 
     if (this.$module && this.$linkedElement) {
-      this.$module.addEventListener("click", () => this.focusLinkedElement());
+      this.$module.addEventListener("click", () => this.focusLinkedElement_());
     }
   }
 
-  focusLinkedElement() {
+  focusLinkedElement_() {
     if (!this.$linkedElement.getAttribute("tabindex")) {
       this.$linkedElement.setAttribute("tabindex", "-1");
       this.$linkedElement.classList.add("tna-!--no-focus-style");
 
       if (!this.linkedElementListener) {
         this.$linkedElement.addEventListener("blur", () =>
-          this.removeFocusProperties(),
+          this.removeFocusProperties_(),
         );
         this.linkedElementListener = true;
       }
@@ -30,7 +30,7 @@ export default class SkipLink {
     this.$linkedElement.focus();
   }
 
-  removeFocusProperties() {
+  removeFocusProperties_() {
     this.$linkedElement.removeAttribute("tabindex");
     this.$linkedElement.classList.remove("tna-!--no-focus-style");
   }

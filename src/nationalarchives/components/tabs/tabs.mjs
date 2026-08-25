@@ -19,10 +19,10 @@ export default class Tabs {
     }
 
     this.currentTabIndex = 0;
-    this.init();
+    this.init_();
   }
 
-  init() {
+  init_() {
     this.$module.classList.add("tna-tabs--interactive");
     this.$tabList.removeAttribute("hidden");
     this.$tabListItemLinks.forEach(($tabListItemLink) => {
@@ -33,44 +33,44 @@ export default class Tabs {
       $tabPanel.setAttribute("role", "tabpanel");
       $tabListItemLink.addEventListener(
         "click",
-        (event) => this.handleItemLinkClick(event),
+        (event) => this.handleItemLinkClick_(event),
         true,
       );
     });
-    this.switchTabByIndex(this.currentTabIndex);
+    this.switchTabByIndex_(this.currentTabIndex);
     this.$module.addEventListener("keydown", (event) =>
-      this.handleItemLinkKeyDown(event),
+      this.handleItemLinkKeyDown_(event),
     );
   }
 
-  handleItemLinkClick(itemLinkClickEvent) {
+  handleItemLinkClick_(itemLinkClickEvent) {
     itemLinkClickEvent.preventDefault();
     const targetItem =
       itemLinkClickEvent.currentTarget.getAttribute("aria-controls");
-    this.switchTabByID(targetItem);
+    this.switchTabByID_(targetItem);
   }
 
-  handleItemLinkKeyDown(itemLinkKeyDownEvent) {
+  handleItemLinkKeyDown_(itemLinkKeyDownEvent) {
     let preventDefaultKeyAction = false;
     switch (itemLinkKeyDownEvent.key) {
       case "ArrowLeft":
       case "ArrowUp":
-        this.previousTab();
+        this.previousTab_();
         preventDefaultKeyAction = true;
         break;
       case "ArrowRight":
       case "ArrowDown":
-        this.nextTab();
+        this.nextTab_();
         preventDefaultKeyAction = true;
         break;
       case "Home":
         /* eslint-disable-next-line no-magic-numbers */
-        this.switchTabByIndex(0, true);
+        this.switchTabByIndex_(0, true);
         preventDefaultKeyAction = true;
         break;
       case "End":
         /* eslint-disable-next-line no-magic-numbers */
-        this.switchTabByIndex(this.$tabListItemLinks.length - 1, true);
+        this.switchTabByIndex_(this.$tabListItemLinks.length - 1, true);
         preventDefaultKeyAction = true;
         break;
       default:
@@ -82,29 +82,29 @@ export default class Tabs {
     }
   }
 
-  nextTab() {
+  nextTab_() {
     /* eslint-disable-next-line no-magic-numbers */
     if (this.currentTabIndex < this.$tabListItemLinks.length - 1) {
       /* eslint-disable-next-line no-magic-numbers */
-      this.switchTabByIndex(this.currentTabIndex + 1, true);
+      this.switchTabByIndex_(this.currentTabIndex + 1, true);
     } else {
       /* eslint-disable-next-line no-magic-numbers */
-      this.switchTabByIndex(0, true);
+      this.switchTabByIndex_(0, true);
     }
   }
 
-  previousTab() {
+  previousTab_() {
     /* eslint-disable-next-line no-magic-numbers */
     if (this.currentTabIndex >= 1) {
       /* eslint-disable-next-line no-magic-numbers */
-      this.switchTabByIndex(this.currentTabIndex - 1, true);
+      this.switchTabByIndex_(this.currentTabIndex - 1, true);
     } else {
       /* eslint-disable-next-line no-magic-numbers */
-      this.switchTabByIndex(this.$tabListItemLinks.length - 1, true);
+      this.switchTabByIndex_(this.$tabListItemLinks.length - 1, true);
     }
   }
 
-  switchTabByIndex(newIndex, switchFocus = false) {
+  switchTabByIndex_(newIndex, switchFocus = false) {
     this.currentTabIndex = newIndex;
     this.$tabListItemLinks.forEach(($tabListItemLink, index) => {
       if (index === this.currentTabIndex) {
@@ -129,10 +129,10 @@ export default class Tabs {
     });
   }
 
-  switchTabByID(targetId) {
+  switchTabByID_(targetId) {
     const index = Array.from(this.$tabItems).findIndex(
       ($tabItem) => $tabItem.getAttribute("id") === targetId,
     );
-    this.switchTabByIndex(index);
+    this.switchTabByIndex_(index);
   }
 }

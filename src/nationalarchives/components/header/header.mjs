@@ -17,43 +17,43 @@ export default class Header {
     }
 
     this.$toggleButton.removeAttribute("hidden");
-    this.syncState();
+    this.syncState_();
     this.$toggleButton.addEventListener("click", () =>
-      this.handleToggleNavigation(),
+      this.handleToggleNavigation_(),
     );
     if ("addEventListener" in this.mql) {
-      this.mql.addEventListener("change", () => this.syncState());
+      this.mql.addEventListener("change", () => this.syncState_());
     } else {
-      this.mql.addListener(() => this.syncState());
+      this.mql.addListener(() => this.syncState_());
     }
 
     this.$module.addEventListener("keyup", (event) => {
       if (event.code === "Escape" && this.menuOpened && this.mql.matches) {
         this.menuOpened = false;
-        this.syncState();
+        this.syncState_();
         this.$toggleButton.focus();
       }
     });
   }
 
-  handleToggleNavigation() {
+  handleToggleNavigation_() {
     this.menuOpened = !this.menuOpened;
-    this.syncState();
+    this.syncState_();
   }
 
-  syncState() {
+  syncState_() {
     if (this.mql.matches) {
       if (this.menuOpened) {
-        this.show();
+        this.show_();
       } else {
-        this.hide();
+        this.hide_();
       }
     } else {
-      this.show();
+      this.show_();
     }
   }
 
-  show() {
+  show_() {
     this.$navigation.classList.add("tna-header__navigation--open");
     this.$navigation.removeAttribute("hidden");
     this.$navigation.setAttribute("aria-hidden", "false");
@@ -67,7 +67,7 @@ export default class Header {
     }
   }
 
-  hide() {
+  hide_() {
     this.$navigation.classList.remove("tna-header__navigation--open");
     this.$navigation.hidden = true;
     this.$navigation.setAttribute("aria-hidden", "true");

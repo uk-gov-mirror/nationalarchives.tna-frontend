@@ -18,38 +18,38 @@ export default class DateInputProgressive {
       return;
     }
 
-    this.update();
-    window.addEventListener("pageshow", () => this.update());
+    this.update_();
+    window.addEventListener("pageshow", () => this.update_());
 
     if (this.$yearInput) {
-      this.$yearInput.addEventListener("keyup", () => this.update());
-      this.$yearInput.addEventListener("change", () => this.update());
+      this.$yearInput.addEventListener("keyup", () => this.update_());
+      this.$yearInput.addEventListener("change", () => this.update_());
     }
     if (this.$monthInput) {
-      this.$monthInput.addEventListener("keyup", () => this.update());
-      this.$monthInput.addEventListener("change", () => this.update());
+      this.$monthInput.addEventListener("keyup", () => this.update_());
+      this.$monthInput.addEventListener("change", () => this.update_());
     }
     if (this.$dayInput) {
-      this.$dayInput.addEventListener("keyup", () => this.update());
-      this.$dayInput.addEventListener("change", () => this.update());
+      this.$dayInput.addEventListener("keyup", () => this.update_());
+      this.$dayInput.addEventListener("change", () => this.update_());
     }
   }
 
-  update() {
-    if (this.isValidYear()) {
-      this.showMonth();
-      if (this.isValidMonth()) {
-        this.showDay();
+  update_() {
+    if (this.isValidYear_()) {
+      this.showMonth_();
+      if (this.isValidMonth_()) {
+        this.showDay_();
       } else {
-        this.hideDay();
+        this.hideDay_();
       }
     } else {
-      this.hideMonth();
-      this.hideDay();
+      this.hideMonth_();
+      this.hideDay_();
     }
   }
 
-  isValidYear() {
+  isValidYear_() {
     if (!this.$yearInput) {
       return true;
     }
@@ -58,13 +58,13 @@ export default class DateInputProgressive {
     return !isNaN(this.$yearInput.value) && !isNaN(yearValue) && yearValue > 0;
   }
 
-  isValidMonth() {
+  isValidMonth_() {
     if (!this.$monthInput) {
       return true;
     }
     const monthRawValue = this.$monthInput.value.trim();
     const monthIntValue = parseInt(monthRawValue, 10);
-    const validMonthStrings = [
+    const validFullMonthStrings = [
       "january",
       "february",
       "march",
@@ -77,18 +77,10 @@ export default class DateInputProgressive {
       "october",
       "november",
       "december",
-      "jan",
-      "feb",
-      "mar",
-      "apr",
-      "jun",
-      "jul",
-      "aug",
-      "sep",
-      "oct",
-      "nov",
-      "dec",
     ];
+    const validMonthStrings = validFullMonthStrings.concat(
+      validFullMonthStrings.map((month) => month.slice(0, 3)),
+    );
     return (
       (!isNaN(this.$monthInput.value) &&
         !isNaN(monthIntValue) &&
@@ -100,25 +92,25 @@ export default class DateInputProgressive {
     );
   }
 
-  showMonth() {
+  showMonth_() {
     if (this.$monthWrapper) {
       this.$monthWrapper.removeAttribute("hidden");
     }
   }
 
-  hideMonth() {
+  hideMonth_() {
     if (this.$monthWrapper) {
       this.$monthWrapper.setAttribute("hidden", "");
     }
   }
 
-  showDay() {
+  showDay_() {
     if (this.$dayWrapper) {
       this.$dayWrapper.removeAttribute("hidden");
     }
   }
 
-  hideDay() {
+  hideDay_() {
     if (this.$dayWrapper) {
       this.$dayWrapper.setAttribute("hidden", "");
     }

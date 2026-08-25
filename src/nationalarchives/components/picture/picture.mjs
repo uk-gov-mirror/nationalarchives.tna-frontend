@@ -28,17 +28,17 @@ export default class Picture {
     this.closeLabel =
       this.$module.dataset.informationLabelClose || "Close transcript";
 
-    this.init();
+    this.init_();
   }
 
-  init() {
+  init_() {
     const uniqueId = `tna-picture-${uuidv4()}`;
 
     this.$transcriptToggle.removeAttribute("hidden");
     this.$transcriptToggle.setAttribute("aria-controls", uniqueId);
     this.$transcriptToggle.innerText = this.openLabel;
     this.$transcriptToggle.addEventListener("click", () =>
-      this.toggleTranscript(),
+      this.toggleTranscript_(),
     );
 
     this.$transcript.setAttribute("id", uniqueId);
@@ -47,7 +47,7 @@ export default class Picture {
     this.$transcript.addEventListener("keydown", (event) => {
       switch (event.key) {
         case "Escape":
-          this.toggleTranscript();
+          this.toggleTranscript_();
           this.$transcriptToggle.focus();
           break;
         default:
@@ -56,7 +56,7 @@ export default class Picture {
     });
   }
 
-  toggleTranscript() {
+  toggleTranscript_() {
     this.transcriptOpened = !this.transcriptOpened;
     if (this.transcriptOpened) {
       this.$transcriptToggle.setAttribute("aria-expanded", true);

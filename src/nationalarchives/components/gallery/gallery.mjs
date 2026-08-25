@@ -36,13 +36,13 @@ export default class Gallery {
       ".tna-gallery__navigation-next",
     );
 
-    this.setup();
+    this.setup_();
     /* eslint-disable-next-line no-magic-numbers */
     this.currentId = this.$items[0].id;
     this.showItem(this.currentId);
   }
 
-  setup() {
+  setup_() {
     this.$items.forEach(($item) => {
       $item.setAttribute("hidden", "");
       $item.setAttribute("aria-hidden", "true");
@@ -63,20 +63,20 @@ export default class Gallery {
       switch (event.key) {
         case "ArrowLeft":
         case "ArrowUp":
-          this.showPreviousItem();
+          this.showPreviousItem_();
           preventDefaultKeyAction = true;
           break;
         case "ArrowRight":
         case "ArrowDown":
-          this.showNextItem();
+          this.showNextItem_();
           preventDefaultKeyAction = true;
           break;
         case "Home":
-          this.showFirstItem();
+          this.showFirstItem_();
           preventDefaultKeyAction = true;
           break;
         case "End":
-          this.showLastItem();
+          this.showLastItem_();
           preventDefaultKeyAction = true;
           break;
         default:
@@ -90,10 +90,10 @@ export default class Gallery {
 
     this.$navigationButtons?.removeAttribute("hidden");
     this.$navigationButtonPrev?.addEventListener("click", () => {
-      this.showPreviousItem();
+      this.showPreviousItem_();
     });
     this.$navigationButtonNext?.addEventListener("click", () => {
-      this.showNextItem();
+      this.showNextItem_();
     });
 
     this.$liveRegion = document.createElement("div");
@@ -107,7 +107,7 @@ export default class Gallery {
     );
   }
 
-  showItem(id) {
+  showItem_(id) {
     this.$items.forEach(($item) => {
       if (id && $item.id === id) {
         $item.removeAttribute("hidden");
@@ -130,43 +130,43 @@ export default class Gallery {
     });
     this.currentId = id;
     /* eslint-disable-next-line no-magic-numbers */
-    this.$liveRegion.textContent = `Image ${this.getCurrentItemIndex() + 1} of ${this.$items.length}`;
+    this.$liveRegion.textContent = `Image ${this.getCurrentItemIndex_() + 1} of ${this.$items.length}`;
   }
 
-  getCurrentItemIndex() {
+  getCurrentItemIndex_() {
     return Array.from(this.$items).findIndex(
       ($item) => $item.id === this.currentId,
     );
   }
 
-  showPreviousItem() {
+  showPreviousItem_() {
     /* eslint-disable-next-line no-magic-numbers */
-    let nextIndexToShow = this.getCurrentItemIndex() - 1;
+    let nextIndexToShow = this.getCurrentItemIndex_() - 1;
     /* eslint-disable-next-line no-magic-numbers */
     if (nextIndexToShow < 0) {
       /* eslint-disable-next-line no-magic-numbers */
       nextIndexToShow = this.$items.length - 1;
     }
-    this.showItem(this.$items[nextIndexToShow].id);
+    this.showItem_(this.$items[nextIndexToShow].id);
   }
 
-  showNextItem() {
+  showNextItem_() {
     /* eslint-disable-next-line no-magic-numbers */
-    let nextIndexToShow = this.getCurrentItemIndex() + 1;
+    let nextIndexToShow = this.getCurrentItemIndex_() + 1;
     if (nextIndexToShow >= this.$items.length) {
       /* eslint-disable-next-line no-magic-numbers */
       nextIndexToShow = 0;
     }
-    this.showItem(this.$items[nextIndexToShow].id);
+    this.showItem_(this.$items[nextIndexToShow].id);
   }
 
-  showFirstItem() {
+  showFirstItem_() {
     /* eslint-disable-next-line no-magic-numbers */
-    this.showItem(this.$items[0].id);
+    this.showItem_(this.$items[0].id);
   }
 
-  showLastItem() {
+  showLastItem_() {
     /* eslint-disable-next-line no-magic-numbers */
-    this.showItem(this.$items[this.$items.length - 1].id);
+    this.showItem_(this.$items[this.$items.length - 1].id);
   }
 }

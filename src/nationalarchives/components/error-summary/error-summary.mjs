@@ -81,7 +81,7 @@ export default class ErrorSummary {
       return false;
     }
 
-    const $legendOrLabel = this.getAssociatedLegendOrLabel($input);
+    const $legendOrLabel = this.getAssociatedLegendOrLabel_($input);
     if (!$legendOrLabel) {
       return false;
     }
@@ -112,7 +112,7 @@ export default class ErrorSummary {
    *   associated legend or label can be found
    */
   /* eslint-disable-next-line class-methods-use-this */
-  getAssociatedLegendOrLabel($input) {
+  getAssociatedLegendOrLabel_($input) {
     const $fieldset = $input.closest("fieldset");
 
     if ($fieldset) {

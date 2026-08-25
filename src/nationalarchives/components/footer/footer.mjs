@@ -26,10 +26,10 @@ export default class Footer {
 
     this.themeCookieName = themeCookieName;
 
-    this.init();
+    this.init_();
   }
 
-  init() {
+  init_() {
     this.currentTheme = this.$themeSelector.dataset.themeOnLoad;
 
     this.cookies = new Cookies();
@@ -41,8 +41,8 @@ export default class Footer {
     Array.from(this.$themeSelectorButtons).forEach(($themeSelectorButton) => {
       $themeSelectorButton.addEventListener("click", (event) => {
         const $button = event.target;
-        this.setTheme($button.value);
-        this.selectThemeSelectorButton($button);
+        this.setTheme_($button.value);
+        this.selectThemeSelectorButton_($button);
       });
     });
 
@@ -53,7 +53,7 @@ export default class Footer {
       },
     );
 
-    this.showThemeSelector();
+    this.showThemeSelector_();
     this.cookies.on("changePreference", (data) => {
       if (Object.hasOwn(data, "settings")) {
         if (data.settings === true) {
@@ -67,14 +67,14 @@ export default class Footer {
     });
   }
 
-  showThemeSelector() {
+  showThemeSelector_() {
     this.$themeSelector.removeAttribute("hidden");
     if (this.cookies.exists(this.themeCookieName)) {
       const $currentThemeButton = Array.from(this.$themeSelectorButtons).find(
         ($button) => $button.value === this.cookies.get(this.themeCookieName),
       );
       if ($currentThemeButton) {
-        this.selectThemeSelectorButton($currentThemeButton);
+        this.selectThemeSelectorButton_($currentThemeButton);
       }
     }
     if (!this.cookies.preference("settings")) {
@@ -82,7 +82,7 @@ export default class Footer {
     }
   }
 
-  setTheme(theme) {
+  setTheme_(theme) {
     if (theme === "light") {
       this.$tnaTemplate.classList.remove(
         "tna-template--system-theme",
@@ -105,7 +105,7 @@ export default class Footer {
     }
   }
 
-  selectThemeSelectorButton($selectedButton) {
+  selectThemeSelectorButton_($selectedButton) {
     Array.from(this.$themeSelectorButtons).forEach(($button) => {
       if ($button.value === $selectedButton.value) {
         $button.classList.remove("tna-button--plain");

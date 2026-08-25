@@ -29,110 +29,53 @@ const scopeFromOptions = (options = {}) => {
   return scope;
 };
 
-const initAccordion = (options) => {
+const initSingleComponentInstance = (Module, moduleName, options) => {
   const $scope = scopeFromOptions(options);
-  $scope
-    .querySelectorAll('[data-module="tna-accordion"]')
-    .forEach(($accordion) => {
-      new Accordion($accordion);
-    });
-};
-
-const initBreadcrumbs = (options) => {
-  const $scope = scopeFromOptions(options);
-  const $breadcrumbs = $scope.querySelector('[data-module="tna-breadcrumbs"]');
-  if ($breadcrumbs) {
-    new Breadcrumbs($breadcrumbs);
+  const dataModuleName = `tna-${moduleName.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
+  const $el = $scope.querySelector(`[data-module="${dataModuleName}"]`);
+  if ($el) {
+    new Module($el);
   }
 };
 
-const initCodeBlock = (options) => {
+const initAllComponentInstances = (Module, moduleName, options) => {
   const $scope = scopeFromOptions(options);
+  const dataModuleName = `tna-${moduleName.replace(/([A-Z])/g, "-$1").toLowerCase()}`;
   $scope
-    .querySelectorAll('[data-module="tna-code-block"]')
-    .forEach(($codeBlock) => {
-      new CodeBlock($codeBlock);
+    .querySelectorAll(`[data-module="${dataModuleName}"]`)
+    .forEach(($el) => {
+      new Module($el);
     });
 };
 
-const initCookieBanner = (options) => {
-  const $scope = scopeFromOptions(options);
-  const $cookieBanner = $scope.querySelector(
-    '[data-module="tna-cookie-banner"]',
+const initAccordion = (options) =>
+  initAllComponentInstances(Accordion, "tna-accordion", options);
+const initBreadcrumbs = (options) =>
+  initSingleComponentInstance(Breadcrumbs, "tna-breadcrumbs", options);
+const initCodeBlock = (options) =>
+  initAllComponentInstances(CodeBlock, "tna-code-block", options);
+const initCookieBanner = (options) =>
+  initSingleComponentInstance(CookieBanner, "tna-cookie-banner", options);
+const initDateInputProgressive = (options) =>
+  initAllComponentInstances(
+    DateInputProgressive,
+    "tna-date-input-progressive",
+    options,
   );
-  if ($cookieBanner) {
-    new CookieBanner($cookieBanner);
-  }
-};
-
-const initDateInputProgressive = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope
-    .querySelectorAll('[data-module="tna-date-input-progressive"]')
-    .forEach(($dateInput) => {
-      new DateInputProgressive($dateInput);
-    });
-};
-
-const initErrorSummary = (options) => {
-  const $scope = scopeFromOptions(options);
-  const $errorSummary = $scope.querySelector(
-    '[data-module="tna-error-summary"]',
-  );
-  if ($errorSummary) {
-    new ErrorSummary($errorSummary);
-  }
-};
-
-const initFileInputDroppable = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope
-    .querySelectorAll('[data-module="tna-file-input"]')
-    .forEach(($fileInput) => {
-      new FileInputDroppable($fileInput);
-    });
-};
-
-const initFooter = (options) => {
-  const $scope = scopeFromOptions(options);
-  const $footer = $scope.querySelector('[data-module="tna-footer"]');
-  if ($footer) {
-    new Footer($footer);
-  }
-};
-
-const initGallery = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope.querySelectorAll('[data-module="tna-gallery"]').forEach(($gallery) => {
-    new Gallery($gallery);
-  });
-};
-
-const initGlobalHeader = (options) => {
-  const $scope = scopeFromOptions(options);
-  const $globalHeader = $scope.querySelector(
-    '[data-module="tna-global-header"]',
-  );
-  if ($globalHeader) {
-    new GlobalHeader($globalHeader);
-  }
-};
-
-const initHeader = (options) => {
-  const $scope = scopeFromOptions(options);
-  const $header = $scope.querySelector('[data-module="tna-header"]');
-  if ($header) {
-    new Header($header);
-  }
-};
-
-const initPicture = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope.querySelectorAll('[data-module="tna-picture"]').forEach(($picture) => {
-    new Picture($picture);
-  });
-};
-
+const initErrorSummary = (options) =>
+  initSingleComponentInstance(ErrorSummary, "tna-error-summary", options);
+const initFileInputDroppable = (options) =>
+  initAllComponentInstances(FileInputDroppable, "tna-file-input", options);
+const initFooter = (options) =>
+  initSingleComponentInstance(Footer, "tna-footer", options);
+const initGallery = (options) =>
+  initAllComponentInstances(Gallery, "tna-gallery", options);
+const initGlobalHeader = (options) =>
+  initSingleComponentInstance(GlobalHeader, "tna-global-header", options);
+const initHeader = (options) =>
+  initSingleComponentInstance(Header, "tna-header", options);
+const initPicture = (options) =>
+  initAllComponentInstances(Picture, "tna-picture", options);
 const initSidebar = (options) => {
   const $scope = scopeFromOptions(options);
   const $sidebar = $scope.querySelector('[data-module="tna-sidebar-sections"]');
@@ -141,23 +84,10 @@ const initSidebar = (options) => {
     new Sidebar($sidebar, { scrollTopThreshold, disableHighlightSize });
   }
 };
-
-const initSkipLink = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope
-    .querySelectorAll('[data-module="tna-skip-link"]')
-    .forEach(($skipLink) => {
-      new SkipLink($skipLink);
-    });
-};
-
-const initTabs = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope.querySelectorAll('[data-module="tna-tabs"]').forEach(($tabModule) => {
-    new Tabs($tabModule);
-  });
-};
-
+const initSkipLink = (options) =>
+  initAllComponentInstances(SkipLink, "tna-skip-link", options);
+const initTabs = (options) =>
+  initAllComponentInstances(Tabs, "tna-tabs", options);
 const initTextAreaItemisedRows = (options) => {
   const $scope = scopeFromOptions(options);
   $scope
@@ -167,15 +97,12 @@ const initTextAreaItemisedRows = (options) => {
       new TextAreaItemisedRows($textAreaWithItemisedRows, { enhancedHint });
     });
 };
-
-const initTextInputPassword = (options) => {
-  const $scope = scopeFromOptions(options);
-  $scope
-    .querySelectorAll('[data-module="tna-text-input-password"]')
-    .forEach(($textInputPassword) => {
-      new TextInputPassword($textInputPassword);
-    });
-};
+const initTextInputPassword = (options) =>
+  initAllComponentInstances(
+    TextInputPassword,
+    "tna-text-input-password",
+    options,
+  );
 
 const preInit = (options) => {
   const $scope = scopeFromOptions(options);

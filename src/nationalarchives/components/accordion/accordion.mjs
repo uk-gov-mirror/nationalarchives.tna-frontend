@@ -11,14 +11,14 @@ export default class Accordion {
     this.allowMultipleItemsOpen =
       this.$module.dataset.singleOpenItem !== "true";
 
-    this.$items.forEach(($item) => this.initItem($item));
-    this.initState();
+    this.$items.forEach(($item) => this.initItem_($item));
+    this.initState_();
 
     this.$toggleAllButton = this.$module.querySelector(
       ".tna-accordion__toggle-all",
     );
     if (this.$toggleAllButton) {
-      this.syncToggleAllButton();
+      this.syncToggleAllButton_();
       this.$toggleAllButton.removeAttribute("hidden");
       this.$toggleAllButton.addEventListener("click", () => {
         if (this.isAllOpen()) {
@@ -26,12 +26,12 @@ export default class Accordion {
         } else {
           this.$items.forEach(($item) => this.openItem($item));
         }
-        this.syncToggleAllButton();
+        this.syncToggleAllButton_();
       });
     }
   }
 
-  initItem($item) {
+  initItem_($item) {
     const $heading = $item.querySelector(".tna-accordion__heading");
     const $content = $item.querySelector(".tna-accordion__body");
 
@@ -59,27 +59,27 @@ export default class Accordion {
     $headingButton.addEventListener("click", () => {
       const isOpen = $headingButton.getAttribute("aria-expanded") === "true";
       if (isOpen) {
-        this.closeItem($item);
+        this.closeItem_($item);
       } else {
-        this.openItem($item);
+        this.openItem_($item);
       }
     });
   }
 
-  initState() {
+  initState_() {
     this.$items.forEach(($item) => {
       if ($item.dataset.isopen === "true") {
-        this.openItem($item);
+        this.openItem_($item);
       } else {
-        this.closeItem($item);
+        this.closeItem_($item);
       }
       $item.removeAttribute("data-isopen");
     });
   }
 
-  openItem($item) {
+  openItem_($item) {
     if (!this.allowMultipleItemsOpen) {
-      this.closeAllItemsExcept($item);
+      this.closeAllItemsExcept_($item);
     }
     const $headingButton = $item.querySelector(".tna-accordion__summary");
     const $content = $item.querySelector(".tna-accordion__content");
@@ -90,7 +90,7 @@ export default class Accordion {
     );
     $content.removeAttribute("hidden");
     // $content.setAttribute("tabindex", "0");
-    this.syncToggleAllButton();
+    this.syncToggleAllButton_();
 
     const $tableWrapper = $content.querySelectorAll(".tna-table-wrapper");
     if ($tableWrapper) {
@@ -100,7 +100,7 @@ export default class Accordion {
     }
   }
 
-  closeItem($item) {
+  closeItem_($item) {
     const $headingButton = $item.querySelector(".tna-accordion__summary");
     const $content = $item.querySelector(".tna-accordion__content");
     $headingButton.setAttribute("aria-expanded", "false");
@@ -110,10 +110,10 @@ export default class Accordion {
     );
     $content.setAttribute("hidden", "");
     // $content.setAttribute("tabindex", "-1");
-    this.syncToggleAllButton();
+    this.syncToggleAllButton_();
   }
 
-  closeAllItemsExcept($excludeItem) {
+  closeAllItemsExcept_($excludeItem) {
     Array.from(this.$items)
       .filter(
         ($item) =>
@@ -122,10 +122,10 @@ export default class Accordion {
             .querySelector(".tna-accordion__summary")
             .getAttribute("aria-expanded") === "true",
       )
-      .forEach(($item) => this.closeItem($item));
+      .forEach(($item) => this.closeItem_($item));
   }
 
-  isAllOpen() {
+  isAllOpen_() {
     return Array.from(this.$items).every(
       ($item) =>
         $item
@@ -134,9 +134,9 @@ export default class Accordion {
     );
   }
 
-  syncToggleAllButton() {
+  syncToggleAllButton_() {
     if (this.$toggleAllButton) {
-      if (this.isAllOpen()) {
+      if (this.isAllOpen_()) {
         this.$toggleAllButton.innerText =
           this.$toggleAllButton.dataset.closeAllLabel || "Hide all sections";
       } else {

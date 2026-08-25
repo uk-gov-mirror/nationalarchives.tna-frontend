@@ -17,6 +17,12 @@ export default defineConfig([
     },
   },
   {
+    files: ["**/*.mjs"],
+    rules: {
+      "no-underscore-dangle": "off",
+    },
+  },
+  {
     files: ["**/analytics.js"],
     rules: {
       camelcase: "off",

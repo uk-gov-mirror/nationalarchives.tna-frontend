@@ -42,14 +42,14 @@ export default class CookieBanner {
     ) {
       this.$module.removeAttribute("hidden");
 
-      this.$acceptButton.addEventListener("click", () => this.accept());
-      this.$rejectButton.addEventListener("click", () => this.reject());
+      this.$acceptButton.addEventListener("click", () => this.accept_());
+      this.$rejectButton.addEventListener("click", () => this.reject_());
     }
   }
 
-  accept() {
+  accept_() {
     this.$prompt.setAttribute("hidden", "");
-    this.complete();
+    this.complete_();
     this.cookies.enableAllPreferences();
     this.$acceptedMessage.removeAttribute("hidden");
     this.$acceptedMessage.setAttribute("tabindex", "0");
@@ -59,9 +59,9 @@ export default class CookieBanner {
     });
   }
 
-  reject() {
+  reject_() {
     this.$prompt.setAttribute("hidden", "");
-    this.complete();
+    this.complete_();
     this.cookies.disableAllPreferences();
     this.$rejectedMessage.removeAttribute("hidden");
     this.$rejectedMessage.setAttribute("tabindex", "0");
@@ -71,14 +71,14 @@ export default class CookieBanner {
     });
   }
 
-  complete() {
+  complete_() {
     this.cookies.set(this.cookiePreferencesSetKey, true);
     this.$closeButtons.forEach(($closeButton) => {
-      $closeButton.addEventListener("click", () => this.close());
+      $closeButton.addEventListener("click", () => this.close_());
     });
   }
 
-  close() {
+  close_() {
     this.$module.setAttribute("hidden", "");
   }
 }

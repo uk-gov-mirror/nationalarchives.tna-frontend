@@ -27,43 +27,43 @@ export default class GlobalHeader {
     }
 
     this.$toggleButton.removeAttribute("hidden");
-    this.syncState();
+    this.syncState_();
     this.$toggleButton.addEventListener("click", () =>
-      this.handleToggleNavigation(),
+      this.handleToggleNavigation_(),
     );
     if ("addEventListener" in this.mql) {
-      this.mql.addEventListener("change", () => this.syncState());
+      this.mql.addEventListener("change", () => this.syncState_());
     } else {
-      this.mql.addListener(() => this.syncState());
+      this.mql.addListener(() => this.syncState_());
     }
 
     this.$module.addEventListener("keyup", (event) => {
       if (event.code === "Escape" && this.mql.matches && this.menuOpened) {
         this.menuOpened = false;
-        this.syncState();
+        this.syncState_();
         this.$toggleButton.focus();
       }
     });
   }
 
-  handleToggleNavigation() {
+  handleToggleNavigation_() {
     this.menuOpened = !this.menuOpened;
-    this.syncState();
+    this.syncState_();
   }
 
-  syncState() {
+  syncState_() {
     if (this.mql.matches) {
       if (this.menuOpened) {
-        this.show();
+        this.show_();
       } else {
-        this.hide();
+        this.hide_();
       }
     } else {
-      this.show();
+      this.show_();
     }
   }
 
-  hide() {
+  hide_() {
     if (this.$navigation) {
       this.$navigation.hidden = true;
       this.$navigation.setAttribute("aria-hidden", "true");
@@ -83,7 +83,7 @@ export default class GlobalHeader {
     }
   }
 
-  show() {
+  show_() {
     if (this.$navigation) {
       this.$navigation.hidden = false;
       this.$navigation.setAttribute("aria-hidden", "false");

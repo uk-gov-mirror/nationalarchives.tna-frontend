@@ -9,7 +9,7 @@
     "build:package": "./tasks/build-package.sh",
     "build:errorpages": "npm run compile:sass && npm run compile:scripts && node tasks/static-error-pages/generate.js",
     "compile:sass": "sass --style=compressed --load-path=node_modules --embed-sources src/nationalarchives:package/nationalarchives",
-    "compile:scripts": "node vite.build.js",
+    "compile:scripts": "esbuild --bundle --minify --sourcemap --drop:debugger --drop:console --mangle-props=_$ --platform=browser \"src/nationalarchives/**/*.mjs\" --outdir=package/nationalarchives --out-extension:.js=.min.js",
     "lint:check": "prettier --check '{src,.storybook,tasks,.}/**/*.{js,mjs,scss,json,html}' && stylelint 'src/**/*.scss' && eslint 'src/**/*.{js,mjs}'",
     "lint:fix": "prettier --write --list-different '{src,.storybook,tasks,.}/**/*.{js,mjs,scss,json,html}' && stylelint --fix 'src/**/*.scss' && eslint --fix 'src/**/*.{js,mjs}'",
     "test:all": "npm run lint:check && npm run test:statichtml && npm run test:fixtures && npm run test:vitest && npm run build:package && npm run test:package",
@@ -48,8 +48,6 @@
     "@nationalarchives/cookies": "^0.1.5"
   },
   "devDependencies": {
-    "@babel/core": "^8.0.0",
-    "@babel/preset-env": "^8.0.0",
     "@mdx-js/react": "^3.0.1",
     "@nationalarchives/eslint-config": "^0.1.4",
     "@nationalarchives/stylelint-config": "^0.1.1",
@@ -67,6 +65,7 @@
     "chromatic": "^18.0.0",
     "css-loader": "^7.1.2",
     "diff": "^9.0.0",
+    "esbuild": "^0.28.2",
     "eslint-plugin-storybook": "^10.5.5",
     "glob": "^13.0.0",
     "html-validate": "^11.0.0",
@@ -82,8 +81,6 @@
     "simple-nunjucks-loader": "^3.2.0",
     "storybook": "^10.5.5",
     "style-loader": "^4.0.0",
-    "vite": "^8.2.1",
-    "vite-plugin-static-copy": "^4.0.0",
     "vitest": "^4.0.6"
   }
 }

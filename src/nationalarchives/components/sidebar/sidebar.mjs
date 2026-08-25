@@ -28,10 +28,10 @@ export default class Sidebar {
     this.scrollTopThreshold = scrollTopThreshold;
     this.disableHighlightSize = disableHighlightSize;
 
-    this.init();
+    this.init_();
   }
 
-  init() {
+  init_() {
     this.breakpoints = {
       tiny:
         getComputedStyle(document.documentElement).getPropertyValue(
@@ -62,12 +62,12 @@ export default class Sidebar {
 
     this.currentItem = null;
 
-    window.addEventListener("scroll", () => this.highlightCurrentSection());
-    window.addEventListener("resize", () => this.highlightCurrentSection());
-    this.highlightCurrentSection();
+    window.addEventListener("scroll", () => this.highlightCurrentSection_());
+    window.addEventListener("resize", () => this.highlightCurrentSection_());
+    this.highlightCurrentSection_();
   }
 
-  highlightCurrentSection() {
+  highlightCurrentSection_() {
     if (this.hideOnDevice && this.hideOnDevice.matches) {
       this.items.forEach((item) => {
         item.$item.classList.remove("tna-sidebar__item--current");

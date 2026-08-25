@@ -8,12 +8,12 @@ export default class FileInputDroppable {
       return;
     }
 
-    this.acceptMutltipleFiles = this.$input.hasAttribute("multiple");
+    this.acceptMultipleFiles = this.$input.hasAttribute("multiple");
 
-    this.init();
+    this.init_();
   }
 
-  init() {
+  init_() {
     this.$droppableArea = document.createElement("div");
     this.$droppableArea.classList.add(
       "tna-file-input__droppable",
@@ -26,7 +26,7 @@ export default class FileInputDroppable {
     this.$pseudoSelectFileText.classList.add(
       "tna-file-input__droppable-status",
     );
-    const fileText = this.acceptMutltipleFiles ? "files" : "file";
+    const fileText = this.acceptMultipleFiles ? "files" : "file";
     this.$pseudoSelectFileText.textContent = `No ${fileText} selected`;
     this.$droppableArea.appendChild(this.$pseudoSelectFileText);
     const $droppableButtons = document.createElement("div");
@@ -50,23 +50,23 @@ export default class FileInputDroppable {
     this.$droppableArea.appendChild(this.$droppableAreaAriaLabel);
 
     this.$input.addEventListener("dragenter", (event) =>
-      this.showDropTarget(event),
+      this.showDropTarget_(event),
     );
-    this.$input.addEventListener("dragleave", () => this.hideDropTarget());
-    this.$input.addEventListener("dragend", () => this.hideDropTarget());
-    this.$input.addEventListener("change", () => this.onChange());
-    this.$input.addEventListener("drop", () => this.onChange());
+    this.$input.addEventListener("dragleave", () => this.hideDropTarget_());
+    this.$input.addEventListener("dragend", () => this.hideDropTarget_());
+    this.$input.addEventListener("change", () => this.onChange_());
+    this.$input.addEventListener("drop", () => this.onChange_());
   }
 
   /* eslint-disable-next-line class-methods-use-this */
-  isContainingFiles(dataTransfer) {
+  isContainingFiles_(dataTransfer) {
     const hasNoTypesInfo = !dataTransfer.types.length;
     const isDraggingFiles = dataTransfer.types.some((type) => type === "Files");
     return hasNoTypesInfo || isDraggingFiles;
   }
 
-  showDropTarget(event, updateAriaLabel = true) {
-    if (event.dataTransfer && this.isContainingFiles(event.dataTransfer)) {
+  showDropTarget_(event, updateAriaLabel = true) {
+    if (event.dataTransfer && this.isContainingFiles_(event.dataTransfer)) {
       let classToAdd = "tna-file-input__droppable--over";
       if (event.dataTransfer.items.length) {
         classToAdd = "tna-file-input__droppable--over-multiple";
@@ -79,7 +79,7 @@ export default class FileInputDroppable {
     }
   }
 
-  hideDropTarget(updateAriaLabel = true) {
+  hideDropTarget_(updateAriaLabel = true) {
     this.$droppableArea.classList.remove(
       "tna-file-input__droppable--over",
       "tna-file-input__droppable--over-multiple",
@@ -89,9 +89,9 @@ export default class FileInputDroppable {
     }
   }
 
-  onChange() {
+  onChange_() {
     const { files } = this.$input;
-    if (this.acceptMutltipleFiles) {
+    if (this.acceptMultipleFiles) {
       if (files.length) {
         let fileText = "file";
         /* eslint-disable-next-line no-magic-numbers */
@@ -113,6 +113,6 @@ export default class FileInputDroppable {
     } else {
       this.$droppableArea.classList.add("tna-file-input__droppable--empty");
     }
-    this.hideDropTarget(false);
+    this.hideDropTarget_(false);
   }
 }
