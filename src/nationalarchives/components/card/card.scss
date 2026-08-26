@@ -117,10 +117,10 @@
     &:hover {
       @include colour.colour-outline(
         "base-keyline",
-        a11yVars.$focus-outline-active-outer-width,
+        a11yVars.$focus-outline-active-total-width,
         solid
       );
-      outline-offset: a11yVars.$focus-outline-active-inner-width;
+      // outline-offset: a11yVars.$focus-outline-active-inner-width;
     }
   }
 

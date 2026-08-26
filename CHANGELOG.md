@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Quick filter styles have been updated
+- Improved hover styles for form items and cards
 
 ### Deprecated
 ### Removed

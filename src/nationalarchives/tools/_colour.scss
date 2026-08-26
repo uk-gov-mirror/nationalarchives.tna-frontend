@@ -1,6 +1,7 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
+@use "../variables/a11y";
 @use "../variables/borders";
 @use "../variables/forms";
 @use "../variables/colour";
@@ -141,6 +142,10 @@ $base-colours: (
   @include colour-font("input-foreground");
   @include colour-background("input-background");
   @include colour-border("input-border", forms.$form-field-border-width);
+
+  &:hover {
+    outline: a11y.$focus-outline-active-total-width var(--keyline) solid;
+  }
 }
 
 @mixin colour-input() {
