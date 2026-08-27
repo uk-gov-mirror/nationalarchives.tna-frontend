@@ -5,7 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/nationalarchives/tna-frontend/compare/v1.2.0...HEAD)
+## [Unreleased](https://github.com/nationalarchives/tna-frontend/compare/v1.3.0...HEAD)
+
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [1.3.0](https://github.com/nationalarchives/tna-frontend/compare/v1.2.0...v1.3.0) - 2026-08-27
 
 ### Added
 
@@ -19,7 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved hover styles for form items and cards
 - Improved tabs component
 
-### Deprecated
 ### Removed
 
 - Removed `preferencesSetKey` from cookie banner and use new `cookie_preferences_set` feature from TNA Frontend Cookies
@@ -28,8 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed issue with Dragon not being able to select checkbox and radio items
 - Removed `aria-label` from `<summary>` element of hero image infortmation
-
-### Security
 
 ## [1.2.0](https://github.com/nationalarchives/tna-frontend/compare/v1.1.0...v1.2.0) - 2026-08-04
 
