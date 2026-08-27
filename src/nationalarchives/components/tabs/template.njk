@@ -1,9 +1,9 @@
 {%- set containerClasses = [params.classes] if params.classes else [] -%}
-{%- if params.sticky -%}
-  {%- set containerClasses = containerClasses.concat('tna-tabs--sticky') -%}
+{%- if params.small -%}
+  {%- set containerClasses = containerClasses.concat('tna-tabs--small') -%}
 {%- endif -%}
 {%- set classes = containerClasses | join(' ') -%}
-<div class="tna-tabs{% if classes %} {{ classes }}{% endif %}" data-module="tna-tabs"{% for attribute, value in params.attributes %} {{ attribute }}{% if value !== '' %}="{{ value }}"{% endif %}{% endfor %}>
+<div class="tna-tabs{% if classes %} {{ classes }}{% endif %}" data-module="tna-tabs"{% if params.activeTabOnLoad %} data-active-tab-on-load="{{ params.activeTabOnLoad }}"{% endif %}{% if params.allowClose %} data-allow-close="true"{% endif %}{% for attribute, value in params.attributes %} {{ attribute }}{% if value !== '' %}="{{ value }}"{% endif %}{% endfor %}>
   <div class="tna-tabs__list" role="tablist" hidden>
   {%- for item in params.items %}
       <button type="button" class="tna-tabs__button" id="{{ item.id }}-tab" aria-controls="{{ item.id }}" role="tab">

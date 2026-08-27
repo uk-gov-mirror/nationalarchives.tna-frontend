@@ -75,6 +75,10 @@
     box-shadow: none;
   }
 
+  .tna-tabs--small .tna-tabs__button-inner {
+    background: transparent;
+  }
+
   @include media.on-tiny {
     &__image-wrapper {
       padding: 0;

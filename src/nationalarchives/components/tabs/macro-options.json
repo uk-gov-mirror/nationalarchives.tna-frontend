@@ -32,6 +32,27 @@
     ]
   },
   {
+    "name": "small",
+    "type": "boolean",
+    "required": false,
+    "description": "If `true`, make the tabs smaller.",
+    "default": false
+  },
+  {
+    "name": "activeTabOnLoad",
+    "type": "number",
+    "required": false,
+    "description": "If set, the index of the tab to be active on load. Defaults to the first tab. Use `-1` to have no tab active on load.",
+    "default": 0
+  },
+  {
+    "name": "allowClose",
+    "type": "boolean",
+    "required": false,
+    "description": "If `true`, allow tabs to be closed.",
+    "default": false
+  },
+  {
     "name": "classes",
     "type": "string",
     "required": false,

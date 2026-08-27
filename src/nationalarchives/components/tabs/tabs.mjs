@@ -18,7 +18,10 @@ export class Tabs {
       return;
     }
 
-    this.currentTabIndex = 0;
+    this.currentTabIndex = this.$module.dataset.activeTabOnLoad
+      ? parseInt(this.$module.dataset.activeTabOnLoad, 10)
+      : 0;
+    this.allowClose = this.$module.dataset.allowClose === "true";
     this.init();
   }
 
@@ -106,6 +109,13 @@ export class Tabs {
 
   switchTabByIndex(newIndex, switchFocus = false) {
     this.currentTabIndex = newIndex;
+    const isTabAlreadySelected =
+      this.$tabListItemLinks[this.currentTabIndex]
+        ?.getAttribute("aria-selected")
+        .toString() === "true";
+    if (isTabAlreadySelected && this.allowClose) {
+      this.currentTabIndex = -1;
+    }
     this.$tabListItemLinks.forEach(($tabListItemLink, index) => {
       if (index === this.currentTabIndex) {
         $tabListItemLink.setAttribute("aria-selected", true);

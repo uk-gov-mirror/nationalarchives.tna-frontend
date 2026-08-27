@@ -12,6 +12,9 @@ export default {
     Object.entries({
       itemHeadingLevel: { control: { type: "number", min: 1, max: 6 } },
       items: { control: "object" },
+      small: { control: "boolean" },
+      activeTabOnLoad: { control: { type: "number", min: -1 } },
+      allowClose: { control: "boolean" },
       classes: { control: "text" },
       attributes: { control: "object" },
     }).map(([key, value]) => [
@@ -58,10 +61,11 @@ export const Standard = {
         body: "<p>Lorem ipsum</p>",
       },
     ],
+    activeTabOnLoad: 2,
   },
 };
 
-export const Tint = {
+export const NoInitialTab = {
   parameters: {
     chromatic: { disableSnapshot: true },
   },
@@ -84,7 +88,35 @@ export const Tint = {
         body: "<p>Lorem ipsum</p>",
       },
     ],
-    classes: "tna-tabs--tint",
+    activeTabOnLoad: -1,
+  },
+};
+
+export const Closeable = {
+  parameters: {
+    chromatic: { disableSnapshot: true },
+  },
+  args: {
+    itemHeadingLevel: 3,
+    items: [
+      {
+        id: "unique-id-a",
+        title: "Alpha section",
+        body: "<p>Lorem ipsum</p>",
+      },
+      {
+        id: "unique-id-b",
+        title: "Beta section",
+        body: "<p>Lorem ipsum</p>",
+      },
+      {
+        id: "unique-id-c",
+        title: "Gamma section",
+        body: "<p>Lorem ipsum</p>",
+      },
+    ],
+    activeTabOnLoad: 0,
+    allowClose: true,
   },
 };
 
@@ -111,7 +143,7 @@ export const Small = {
         body: "<p>Lorem ipsum</p>",
       },
     ],
-    classes: "tna-tabs--small",
+    small: true,
   },
 };
 
@@ -138,6 +170,7 @@ export const Test = {
         body: "<p>Lorem ipsum</p>",
       },
     ],
+    activeTabOnLoad: -1,
   },
   play: async ({ args, canvasElement, step }) => {
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -221,8 +254,8 @@ export const Test = {
             `${args.items[0].id}-tab`,
           );
           await expect(buttonA).toHaveAttribute("role", "tab");
-          await expect(buttonA).toHaveAttribute("tabindex", "0");
-          await expect(buttonA).toHaveAttribute("aria-selected", "true");
+          await expect(buttonA).toHaveAttribute("tabindex", "-1");
+          await expect(buttonA).toHaveAttribute("aria-selected", "false");
           await expect(buttonA).toHaveAttribute(
             "aria-controls",
             args.items[0].id,
@@ -261,14 +294,14 @@ export const Test = {
       });
 
       await step("Test tab sections", async () => {
-        await expect(sectionA).toBeVisible();
+        await expect(sectionA).not.toBeVisible();
         await expect(sectionA).toHaveAttribute("id", args.items[0].id);
         await expect(sectionA).toHaveAttribute("role", "tabpanel");
         await expect(sectionA).toHaveAttribute(
           "aria-labelledby",
           `${args.items[0].id}-tab`,
         );
-        await expect(sectionA).toHaveAttribute("tabindex", "0");
+        await expect(sectionA).toHaveAttribute("tabindex", "-1");
 
         await expect(sectionB).not.toBeVisible();
         await expect(sectionB).toHaveAttribute("id", args.items[1].id);
@@ -292,7 +325,7 @@ export const Test = {
 
     await userEvent.click(buttonA);
 
-    await step("First tab (already selected)", async () => {
+    await step("First tab", async () => {
       await userEvent.click(buttonA);
       await expectButtonAndSectionAToBeCurrent();
     });
