@@ -10,11 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Quick filters now have a `small` option
+- Allow tabs to be closed
 
 ### Changed
 
 - Quick filter styles have been updated
 - Improved hover styles for form items and cards
+- Improved tabs component
 
 ### Deprecated
 ### Removed
@@ -24,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed issue with Dragon not being able to select checkbox and radio items
+- Removed `aria-label` from `<summary>` element of hero image infortmation
 
 ### Security
 
