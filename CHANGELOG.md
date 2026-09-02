@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased](https://github.com/nationalarchives/tna-frontend/compare/v1.3.1...HEAD)
 
 ### Added
+
+- Add `aria-label`, `classes`, and `attributes` support to item buttons in tab components
+
 ### Changed
 ### Deprecated
 ### Removed

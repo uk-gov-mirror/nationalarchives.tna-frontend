@@ -6,7 +6,7 @@
 <div class="tna-tabs{% if classes %} {{ classes }}{% endif %}" data-module="tna-tabs"{% if params.activeTabOnLoad %} data-active-tab-on-load="{{ params.activeTabOnLoad }}"{% endif %}{% if params.allowClose %} data-allow-close="true"{% endif %}{% for attribute, value in params.attributes %} {{ attribute }}{% if value !== '' %}="{{ value }}"{% endif %}{% endfor %}>
   <div class="tna-tabs__list" role="tablist" hidden>
   {%- for item in params.items %}
-      <button type="button" class="tna-tabs__button" id="{{ item.id }}-tab" aria-controls="{{ item.id }}" role="tab">
+      <button type="button" class="tna-tabs__button{% if item.classes %} {{ item.classes }}{% endif %}" id="{{ item.id }}-tab" aria-controls="{{ item.id }}" role="tab"{% if item.ariaLabel %} aria-label="{{ item.ariaLabel }}"{% endif %} {%- for attribute, value in item.attributes %} {{ attribute }}{% if value !== '' %}="{{ value }}"{% endif %}{% endfor %}>
         <span class="tna-tabs__button-inner">
           {{ item.title }}
         </span>

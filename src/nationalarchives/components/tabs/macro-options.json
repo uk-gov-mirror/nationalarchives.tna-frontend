@@ -24,10 +24,28 @@
         "description": "The title of the tab item."
       },
       {
+        "name": "ariaLabel",
+        "type": "string",
+        "required": false,
+        "description": "An optional aria-label for the button of the tab item."
+      },
+      {
         "name": "body",
         "type": "string",
         "required": true,
         "description": "The body content of the tab item."
+      },
+      {
+        "name": "classes",
+        "type": "string",
+        "required": false,
+        "description": "Classes to add to the tab item button."
+      },
+      {
+        "name": "attributes",
+        "type": "object",
+        "required": false,
+        "description": "HTML attributes (for example data attributes) to add to the tab item button."
       }
     ]
   },
