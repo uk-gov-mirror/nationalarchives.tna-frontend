@@ -171,6 +171,7 @@ export const Test = {
       },
     ],
     activeTabOnLoad: -1,
+    allowClose: true,
   },
   play: async ({ args, canvasElement, step }) => {
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -254,7 +255,7 @@ export const Test = {
             `${args.items[0].id}-tab`,
           );
           await expect(buttonA).toHaveAttribute("role", "tab");
-          await expect(buttonA).toHaveAttribute("tabindex", "-1");
+          await expect(buttonA).toHaveAttribute("tabindex", "0");
           await expect(buttonA).toHaveAttribute("aria-selected", "false");
           await expect(buttonA).toHaveAttribute(
             "aria-controls",
@@ -269,7 +270,7 @@ export const Test = {
             `${args.items[1].id}-tab`,
           );
           await expect(buttonB).toHaveAttribute("role", "tab");
-          await expect(buttonB).toHaveAttribute("tabindex", "-1");
+          await expect(buttonB).toHaveAttribute("tabindex", "0");
           await expect(buttonB).toHaveAttribute("aria-selected", "false");
           await expect(buttonB).toHaveAttribute(
             "aria-controls",
@@ -284,7 +285,7 @@ export const Test = {
             `${args.items[2].id}-tab`,
           );
           await expect(buttonC).toHaveAttribute("role", "tab");
-          await expect(buttonC).toHaveAttribute("tabindex", "-1");
+          await expect(buttonC).toHaveAttribute("tabindex", "0");
           await expect(buttonC).toHaveAttribute("aria-selected", "false");
           await expect(buttonC).toHaveAttribute(
             "aria-controls",
@@ -301,7 +302,7 @@ export const Test = {
           "aria-labelledby",
           `${args.items[0].id}-tab`,
         );
-        await expect(sectionA).toHaveAttribute("tabindex", "-1");
+        await expect(sectionA).toHaveAttribute("tabindex", "0");
 
         await expect(sectionB).not.toBeVisible();
         await expect(sectionB).toHaveAttribute("id", args.items[1].id);
@@ -310,7 +311,7 @@ export const Test = {
           "aria-labelledby",
           `${args.items[1].id}-tab`,
         );
-        await expect(sectionB).toHaveAttribute("tabindex", "-1");
+        await expect(sectionB).toHaveAttribute("tabindex", "0");
 
         await expect(sectionC).not.toBeVisible();
         await expect(sectionC).toHaveAttribute("id", args.items[2].id);
@@ -319,11 +320,9 @@ export const Test = {
           "aria-labelledby",
           `${args.items[2].id}-tab`,
         );
-        await expect(sectionC).toHaveAttribute("tabindex", "-1");
+        await expect(sectionC).toHaveAttribute("tabindex", "0");
       });
     });
-
-    await userEvent.click(buttonA);
 
     await step("First tab", async () => {
       await userEvent.click(buttonA);
@@ -347,7 +346,6 @@ export const Test = {
 
     await step("Keyboard interaciton", async () => {
       await step("Left/right", async () => {
-        await userEvent.click(buttonA);
         await expectButtonAndSectionAToBeCurrent();
 
         await userEvent.keyboard("[ArrowRight]");
@@ -376,20 +374,34 @@ export const Test = {
       });
 
       await step("Home/end", async () => {
+        await userEvent.click(buttonC);
+        await expectButtonAndSectionCToBeCurrent();
+
+        await userEvent.keyboard("[Home]");
+        await expectButtonAndSectionAToBeCurrent();
+
+        await userEvent.keyboard("[End]");
+        await expectButtonAndSectionCToBeCurrent();
+
+        await userEvent.keyboard("[End]");
+        await expectButtonAndSectionCToBeCurrent();
+
+        await userEvent.keyboard("[Home]");
+        await expectButtonAndSectionAToBeCurrent();
+      });
+
+      await step("Close", async () => {
+        await expect(sectionA).toBeVisible();
+        await expect(buttonA).toHaveAttribute("tabindex", "0");
+        await expect(buttonB).toHaveAttribute("tabindex", "-1");
+        await expect(buttonC).toHaveAttribute("tabindex", "-1");
+
         await userEvent.click(buttonA);
-        await expectButtonAndSectionAToBeCurrent();
 
-        await userEvent.keyboard("[Home]");
-        await expectButtonAndSectionAToBeCurrent();
-
-        await userEvent.keyboard("[End]");
-        await expectButtonAndSectionCToBeCurrent();
-
-        await userEvent.keyboard("[End]");
-        await expectButtonAndSectionCToBeCurrent();
-
-        await userEvent.keyboard("[Home]");
-        await expectButtonAndSectionAToBeCurrent();
+        await expect(sectionA).not.toBeVisible();
+        await expect(buttonA).toHaveAttribute("tabindex", "0");
+        await expect(buttonB).toHaveAttribute("tabindex", "0");
+        await expect(buttonC).toHaveAttribute("tabindex", "0");
       });
 
       await userEvent.keyboard("[Space]");

@@ -68,12 +68,12 @@ export class Tabs {
         break;
       case "Home":
         /* eslint-disable-next-line no-magic-numbers */
-        this.switchTabByIndex(0, true);
+        this.switchTabByIndex(0, true, true);
         preventDefaultKeyAction = true;
         break;
       case "End":
         /* eslint-disable-next-line no-magic-numbers */
-        this.switchTabByIndex(this.$tabListItemLinks.length - 1, true);
+        this.switchTabByIndex(this.$tabListItemLinks.length - 1, true, true);
         preventDefaultKeyAction = true;
         break;
       default:
@@ -107,13 +107,13 @@ export class Tabs {
     }
   }
 
-  switchTabByIndex(newIndex, switchFocus = false) {
+  switchTabByIndex(newIndex, switchFocus = false, disallowClose = false) {
     this.currentTabIndex = newIndex;
     const isTabAlreadySelected =
       this.$tabListItemLinks[this.currentTabIndex]
         ?.getAttribute("aria-selected")
         .toString() === "true";
-    if (isTabAlreadySelected && this.allowClose) {
+    if (isTabAlreadySelected && this.allowClose && !disallowClose) {
       this.currentTabIndex = -1;
     }
     this.$tabListItemLinks.forEach(($tabListItemLink, index) => {
@@ -125,7 +125,10 @@ export class Tabs {
         }
       } else {
         $tabListItemLink.setAttribute("aria-selected", false);
-        $tabListItemLink.setAttribute("tabindex", "-1");
+        $tabListItemLink.setAttribute(
+          "tabindex",
+          this.currentTabIndex === -1 ? "0" : "-1",
+        );
       }
     });
     this.$tabItems.forEach(($tabItem, index) => {
@@ -134,7 +137,10 @@ export class Tabs {
         $tabItem.setAttribute("tabindex", "0");
       } else {
         $tabItem.setAttribute("hidden", "");
-        $tabItem.setAttribute("tabindex", "-1");
+        $tabItem.setAttribute(
+          "tabindex",
+          this.currentTabIndex === -1 ? "0" : "-1",
+        );
       }
     });
   }
