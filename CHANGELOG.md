@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `aria-label`, `classes`, and `attributes` support to item buttons in tab components
 
 ### Changed
+
+- "Copy code" button on code blocks has an improved `aria-label` and `title` if a `filename` is set
+
 ### Deprecated
 ### Removed
 ### Fixed
