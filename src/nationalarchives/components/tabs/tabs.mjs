@@ -21,6 +21,7 @@ export class Tabs {
     this.currentTabIndex = this.$module.dataset.activeTabOnLoad
       ? parseInt(this.$module.dataset.activeTabOnLoad, 10)
       : 0;
+    this.previousTabIndex = this.currentTabIndex;
     this.allowClose = this.$module.dataset.allowClose === "true";
     this.init();
   }
@@ -87,9 +88,9 @@ export class Tabs {
 
   nextTab() {
     /* eslint-disable-next-line no-magic-numbers */
-    if (this.currentTabIndex < this.$tabListItemLinks.length - 1) {
+    if (this.previousTabIndex < this.$tabListItemLinks.length - 1) {
       /* eslint-disable-next-line no-magic-numbers */
-      this.switchTabByIndex(this.currentTabIndex + 1, true);
+      this.switchTabByIndex(this.previousTabIndex + 1, true);
     } else {
       /* eslint-disable-next-line no-magic-numbers */
       this.switchTabByIndex(0, true);
@@ -98,9 +99,9 @@ export class Tabs {
 
   previousTab() {
     /* eslint-disable-next-line no-magic-numbers */
-    if (this.currentTabIndex >= 1) {
+    if (this.previousTabIndex >= 1) {
       /* eslint-disable-next-line no-magic-numbers */
-      this.switchTabByIndex(this.currentTabIndex - 1, true);
+      this.switchTabByIndex(this.previousTabIndex - 1, true);
     } else {
       /* eslint-disable-next-line no-magic-numbers */
       this.switchTabByIndex(this.$tabListItemLinks.length - 1, true);
@@ -109,6 +110,7 @@ export class Tabs {
 
   switchTabByIndex(newIndex, switchFocus = false, disallowClose = false) {
     this.currentTabIndex = newIndex;
+    this.previousTabIndex = this.currentTabIndex;
     const isTabAlreadySelected =
       this.$tabListItemLinks[this.currentTabIndex]
         ?.getAttribute("aria-selected")

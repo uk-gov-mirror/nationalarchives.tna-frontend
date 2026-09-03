@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Tab buttons will inherit font weight which fixes the issue with them not appearing bolder when the user has a preference for higher contrast
+- Fixed issue with closed tabs not opening the correct tab when the left or right arrow keys are pressed
 
 ### Security
 
