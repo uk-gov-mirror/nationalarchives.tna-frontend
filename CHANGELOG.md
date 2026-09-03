@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 ### Removed
 ### Fixed
+
+- Tab buttons will inherit font weight which fixes the issue with them not appearing bolder when the user has a preference for higher contrast
+
 ### Security
 
 ## [1.3.1](https://github.com/nationalarchives/tna-frontend/compare/v1.3.0...v1.3.1) - 2026-09-02

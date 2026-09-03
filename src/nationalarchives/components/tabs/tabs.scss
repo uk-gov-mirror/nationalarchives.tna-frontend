@@ -26,6 +26,8 @@
   &__button {
     position: relative;
 
+    font-weight: inherit;
+
     text-align: center;
 
     background: transparent;
@@ -34,9 +36,9 @@
 
     border: 1px transparent solid;
     border-bottom: none;
-    @include borders.rounded-border;
 
     cursor: pointer;
+    @include borders.rounded-border;
 
     &:active {
       @include a11y.focus-outline;
